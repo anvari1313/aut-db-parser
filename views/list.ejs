@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<p>Welcome to <%= title %></p>
+<script>
+    console.log('<%= result[0].id%>')
+</script>
+
+<script>
+    console.log('<%= result%>');
+</script>
+<form method="post" action="/test">
+    Name:<br>
+    <input type="text" name="name">
+    <br>
+    Post meta key:<br>
+    <input type="text" name="post_meta_key">
+    Post meta value:<br>
+    <input type="text" name="post_meta_value">
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
