@@ -16,11 +16,15 @@ module.exports.initMySQL = () => {
             database        : config.database
         });
 
+        console.log(config);
+
+
         pool.getConnection((error, connection)=>{
             if (error)
                 reject(error);
             else{
                 promisifiedConnectionPool = Promise.promisifyAll(connection);
+                console.log('Successfully connected to database ...');
 
                 resolve();
             }
