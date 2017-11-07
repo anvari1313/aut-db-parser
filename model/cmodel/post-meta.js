@@ -1,7 +1,7 @@
-const Model = require('./model');
-const mysql = require('./../database/database').mySQL();
+const CModel = require('./cmodel');
+const mysql = require('../../database/database').mySQL();
 
-class PostMeta extends Model{
+class PostMeta extends CModel{
     constructor(modelObj){
         super();
         if (modelObj.meta_id) this.meta_id = modelObj.meta_id;
