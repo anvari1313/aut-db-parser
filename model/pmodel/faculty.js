@@ -37,12 +37,20 @@ class Faculty extends ProviderModel{
         this.sexdecode2 = modelObj.sexdecode2;
     }
 
-    get providingListPath(){
-        return '/ords/portal/web/faculties/';
+    static providingSinglePath(facId){
+        return super.serverProviderAddress + '/ords/portal/web/faculties/' + facId;
     }
 
-    static getModel(){
-        return axios.get(this.providingListPath);
+    static get providingListPath(){
+        return super.serverProviderAddress + '/ords/portal/web/faculties/';
+    }
+
+    static getWithId(id){
+        return axios.get(this.providingSinglePath(id)).
+        then(response => {
+            let faculty = new Faculty(super.parseResponseFromServerToJson(response.data)[0]);
+            return Promise.resolve(faculty);
+        });
     }
 }
 
