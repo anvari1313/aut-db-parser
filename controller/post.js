@@ -1,7 +1,7 @@
 const Controller = require('./controller');
 const mysql = require('./../database/database');
-const Post = require('./../model/post');
-const MetaPost = require('./../model/post-meta');
+const Post = require('../model/cmodel/post');
+const MetaPost = require('../model/cmodel/post-meta');
 
 class PostController extends Controller{
     constructor(){
