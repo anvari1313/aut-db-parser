@@ -1,3 +1,4 @@
+const Promise = require('bluebird');
 class CModel{
     constructor(){
 
@@ -17,7 +18,9 @@ class CModel{
 
         query = query.substr(0, query.length - 1) + ')';
         valueQueryPart = valueQueryPart.substr(0, valueQueryPart.length - 1) + ')';
-        return query + ' ' + valueQueryPart;
+        // return query + ' ' + valueQueryPart;
+
+        return Promise.resolve({t:1});
     }
 }
 
