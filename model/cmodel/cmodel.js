@@ -1,4 +1,4 @@
-class Model{
+class CModel{
     constructor(){
 
     }
@@ -21,4 +21,4 @@ class Model{
     }
 }
 
-module.exports = Model;
+module.exports = CModel;
