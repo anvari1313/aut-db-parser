@@ -50,7 +50,7 @@ app.use('/', home);
 app.use('/test', test);
 app.use('/post', connectEnsureLogin.ensureLoggedIn(), post);
 app.use('/faculty',
-    // connectEnsureLogin.ensureLoggedIn(),
+    connectEnsureLogin.ensureLoggedIn(),
     faculty);
 
 // catch 404 and forward to error handler
