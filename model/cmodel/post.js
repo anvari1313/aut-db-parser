@@ -1,7 +1,7 @@
-const Model = require('./model');
-const mysql = require('./../database/database').mySQL();
+const CModel = require('./cmodel');
+const mysql = require('../../database/database').mySQL();
 
-class Post extends Model{
+class Post extends CModel{
     constructor(modelObj){
         super();
         if (modelObj.ID) this.ID = modelObj.ID;
