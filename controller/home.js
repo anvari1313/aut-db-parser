@@ -6,7 +6,7 @@ class HomeController extends Controller{
     }
 
     index(req, res, next){
-        res.render('home/index', { title: 'Test' });
+        res.render('home/index', { title: 'Test', response: {} });
     }
 
 }
