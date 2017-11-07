@@ -6,11 +6,11 @@ const config = require('./../../config/config');
 class ProviderModel{
     constructor(){}
 
-    get providingListPath(){
+    static get providingListPath(){
         throw new Error('Abstract method not implemented.');
     }
 
-    get serverProviderAddress(){
+    static get serverProviderAddress(){
         return config.provider_server.protocol + '://' +
             config.provider_server.address + ':' +
             config.provider_server.port;
@@ -20,8 +20,8 @@ class ProviderModel{
         return this.providingListPath;
     }
 
-    static getModel(){
-        throw new Error('Abstract method not implemented.');
+    static parseResponseFromServerToJson(response){
+        return response.items;
     }
 }
 
