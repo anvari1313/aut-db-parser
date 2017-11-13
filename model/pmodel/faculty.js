@@ -65,7 +65,7 @@ class Faculty extends ProviderModel{
             post_modified: new Date().toISOString().slice(0, 19).replace('T', ' '),
             post_modified_gmt: new Date().toISOString().slice(0, 19).replace('T', ' '),
             post_excerpt: ' ',
-            post_name: encodeURI(this.firstname + ' ' + this.lastname),
+            post_name: encodeURI(this.firstname + '-' + this.lastname),
             post_status: 'publish',
             comment_status: 'closed',
             ping_status: 'closed',
