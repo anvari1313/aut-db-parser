@@ -1,5 +1,8 @@
 const ProviderModel = require('./pmodel');
 const axios = require('axios');
+const Post = require('./../cmodel/post');
+const PostMeta = require('./../cmodel/post-meta');
+const moment = require('moment');
 
 class Faculty extends ProviderModel{
     constructor(modelObj)
@@ -51,6 +54,58 @@ class Faculty extends ProviderModel{
             let faculty = new Faculty(super.parseResponseFromServerToJson(response.data)[0]);
             return Promise.resolve(faculty);
         });
+    }
+
+    portPost(){
+        let post = new Post({
+            post_author: 2,
+            post_title: this.firstname + ' ' + this.lastname,
+            post_date: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            post_date_gmt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            post_modified: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            post_modified_gmt: new Date().toISOString().slice(0, 19).replace('T', ' '),
+            post_excerpt: ' ',
+            post_name: encodeURI(this.firstname + ' ' + this.lastname),
+            post_status: 'publish',
+            comment_status: 'closed',
+            ping_status: 'closed',
+            post_content: ' ',
+            to_ping:' ',
+            pinged:' ',
+            post_type: 'u_member',
+            post_parent: 0,
+            post_content_filtered: 'تست',
+        });
+
+        return post.save().then(response => {
+            let postId = response.insertId;
+
+            post.ID = postId;
+            return Promise.resolve(post);
+        });
+    }
+
+    portPostMeta(postId){
+        // Name of variable mapping from faculty model to put in the post-metas
+        let facultyAttributes = ['grade_code', 'autemail', 'deptname'];
+        let postMetaEquivalents = ['u-member-pos', 'umb-envelop', 'u-member-dept'];
+
+        let postMetas = [];
+
+        // Name of static attributes to put in post-metas for faculty model
+        postMetas.push(new PostMeta({post_id: postId, meta_key: 'member-sidebar', meta_value: 'def'}));
+        postMetas.push(new PostMeta({post_id: postId, meta_key: 'member-dpadding', meta_value: 'on'}));
+
+        for (let key in this){
+            if (this[key] !== undefined && this[key] !== null){
+                let index = facultyAttributes.indexOf(key);
+                if (index !== -1){
+                    postMetas.push(new PostMeta({post_id: postId, meta_key: postMetaEquivalents[index], meta_value: this[key]}));
+                }
+            }
+        }
+
+        return PostMeta.saveAll(postMetas);
     }
 }
 
