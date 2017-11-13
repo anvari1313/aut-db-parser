@@ -1,5 +1,6 @@
 const Controller = require('./../controller');
 const Faculty = require('./../../model/pmodel/faculty');
+const PostMeta = require('./../../model/cmodel/post-meta');
 
 class FacultyController extends Controller{
     constructor(){
@@ -7,27 +8,29 @@ class FacultyController extends Controller{
     }
 
     getSingle(req, res){
+        console.log(req.params['faculty_id']);
         Faculty.getWithId(req.params['faculty_id']).
         then(faculty => res.render('model/single', {modelName: 'Faculty', model: faculty})).
         catch(error => {
+            console.log(error);
             res.locals.message = error;
             res.render('error');
         });
     }
 
-    index(req, res, next){
-        // let faculty = new Faculty({});
-        // Faculty.getModel().
-        // then(response =>
-        // {
-        //     res.render('home/index', { title: 'Test', response: {} });
-        //
-        //     console.log(response.data);
-        // }
-        //     ).
-        // catch(error => console.log(error));
+    portSingle(req, res){
+        let facultyObj;
 
-        res.render('home/index', { title: 'Test', response: {} });
+        Faculty.getWithId(req.params['faculty_id']).
+        then(faculty => { facultyObj = faculty; return faculty.portPost();}).
+        then(post => facultyObj.portPostMeta(post.ID)).
+        then(result => { console.log(result); res.render('model/ported') }).
+        catch(error => {
+            console.log(error);
+            res.locals.message = error;
+            res.render('error');
+        });
+        // res.render('model/ported')
     }
 
 }
