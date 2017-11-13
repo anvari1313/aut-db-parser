@@ -1,5 +1,5 @@
 const CModel = require('./cmodel');
-const mysql = require('../../database/database').mySQL();
+const mysql = require('../../database/database').mySQL;
 
 class Post extends CModel{
     constructor(modelObj){
@@ -34,7 +34,10 @@ class Post extends CModel{
     }
 
     save(){
-        return super.save(Post.tableName);
+        let connection = mysql();
+
+        console.log(super.save(Post.tableName));
+        return connection.queryAsync(super.save(Post.tableName))
     }
 }
 
