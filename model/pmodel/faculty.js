@@ -56,6 +56,7 @@ class Faculty extends ProviderModel{
         });
     }
 
+
     portPost(){
         let post = new Post({
             post_author: 2,
@@ -65,7 +66,7 @@ class Faculty extends ProviderModel{
             post_modified: new Date().toISOString().slice(0, 19).replace('T', ' '),
             post_modified_gmt: new Date().toISOString().slice(0, 19).replace('T', ' '),
             post_excerpt: ' ',
-            post_name: encodeURI(this.firstname + '-' + this.lastname),
+            post_name: encodeURI((this.firstname + '-' + this.lastname).replace(' ', '-')),
             post_status: 'publish',
             comment_status: 'closed',
             ping_status: 'closed',
@@ -74,10 +75,11 @@ class Faculty extends ProviderModel{
             pinged:' ',
             post_type: 'u_member',
             post_parent: 0,
-            post_content_filtered: 'تست',
+            post_content_filtered: ' ',
         });
 
-        return post.save().then(response => {
+        return post.save().
+        then(response => {
             let postId = response.insertId;
 
             post.ID = postId;
@@ -94,7 +96,7 @@ class Faculty extends ProviderModel{
 
         // Name of static attributes to put in post-metas for faculty model
         postMetas.push(new PostMeta({post_id: postId, meta_key: 'member-sidebar', meta_value: 'def'}));
-        postMetas.push(new PostMeta({post_id: postId, meta_key: 'member-dpadding', meta_value: 'on'}));
+        postMetas.push(new PostMeta({post_id: postId, meta_key: 'member-ctpadding', meta_value: 'on'}));
 
         for (let key in this){
             if (this[key] !== undefined && this[key] !== null){
