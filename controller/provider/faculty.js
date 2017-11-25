@@ -55,7 +55,7 @@ class FacultyController extends Controller{
         let url = config.provider_server.protocol + '://' +
         config.provider_server.address + ':' +
         config.provider_server.port + '/ords/portal/web/faculties/';
-        axios.get('url').then(response => res.json(response.data));
+        axios.get(url).then(response => res.json(response.data)).catch();
     }
 }
 
