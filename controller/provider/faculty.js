@@ -1,6 +1,8 @@
 const Controller = require('./../controller');
 const Faculty = require('./../../model/pmodel/faculty');
 const PostMeta = require('./../../model/cmodel/post-meta');
+const axios = require('axios');
+const config = require('./../../config/config');
 
 class FacultyController extends Controller{
     constructor(){
@@ -47,6 +49,13 @@ class FacultyController extends Controller{
         //     res.locals.message = error;
         //     res.render('error');
         // });
+    }
+
+    getList(req, res){
+        let url = config.provider_server.protocol + '://' +
+        config.provider_server.address + ':' +
+        config.provider_server.port + '/ords/portal/web/faculties/';
+        axios.get('url').then(response => res.json(response.data));
     }
 }
 
