@@ -18,6 +18,7 @@ class FacultyController extends Controller{
         });
     }
 
+
     portSingle(req, res){
         let facultyObj;
 
@@ -33,6 +34,20 @@ class FacultyController extends Controller{
         // res.render('model/ported')
     }
 
+    portSingleJson(req, res){
+        let facultyObj;
+
+        Faculty.getWithId(req.params['faculty_id']).
+        then(faculty => { res.json(faculty);})
+            // .
+        // then(post => facultyObj.portPostMeta(post.ID)).
+        // then(result => { console.log(result); res.render('model/ported') }).
+        // catch(error => {
+        //     console.log(error);
+        //     res.locals.message = error;
+        //     res.render('error');
+        // });
+    }
 }
 
 module.exports = new FacultyController();
