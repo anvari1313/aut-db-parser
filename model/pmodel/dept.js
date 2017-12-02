@@ -12,11 +12,11 @@ class Dept extends ProviderModel{
     }
 
     static providingSinglePath(facId){
-        return super.serverProviderAddress + '/ords/portal/web/faculties/' + facId;
+        return super.serverProviderAddress + '/ords/portal/basics/departments/' + facId;
     }
 
     static get providingListPath(){
-        return super.serverProviderAddress + '/ords/portal/web/departments/';
+        return super.serverProviderAddress + '/ords/portal/basics/departments/';
     }
 
     static getWithId(id){
