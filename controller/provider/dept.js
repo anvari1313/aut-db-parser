@@ -1,14 +1,14 @@
 const Controller = require('./../controller');
+const Dept = require('./../../model/pmodel/dept');
 
-class Dept extends Controller{
+class DeptController extends Controller{
     constructor(){
         super();
     }
 
     getAll(req, res){
-
-        res.json({t:'test'});
+        Dept.getAll().then(result => res.json(result));
     }
 }
 
-module.exports = new Dept();
+module.exports = new DeptController();
