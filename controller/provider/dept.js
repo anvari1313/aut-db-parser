@@ -7,7 +7,9 @@ class DeptController extends Controller{
     }
 
     getAll(req, res){
-        Dept.getAll().then(result => res.json(result));
+        Dept.getAll().
+        then(result => res.json(result)).
+        catch(error => res.json(error));
     }
 }
 
