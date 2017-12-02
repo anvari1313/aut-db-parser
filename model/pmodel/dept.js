@@ -28,7 +28,7 @@ class Dept extends ProviderModel{
     }
 
     static getAll(){
-        return axios.get(this.providingListPath()).
+        return axios.get(this.providingListPath).
         then(response => {
             return Promise.resolve(response);
         });
