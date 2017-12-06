@@ -115,7 +115,7 @@ class Faculty extends ProviderModel{
         return PostMeta.saveAll(postMetas);
     }
 
-    getOfDept(deptId){
+    static getOfDept(deptId){
         return Pagination.remove(Faculty.getProvindingListOfDept(deptId));
     }
 }
