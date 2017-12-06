@@ -9,7 +9,6 @@ module.exports.remove = (url) =>
         do {
             let res = request('GET', currentRequestingLink);
             let jsonBody = JSON.parse(res.body.toString());
-            console.log(jsonBody.items);
             array = array.concat(jsonBody.items);
             if (jsonBody.next)
                 currentRequestingLink = jsonBody.next["$ref"];
