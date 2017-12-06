@@ -60,7 +60,7 @@ class FacultyController extends Controller{
 
     getOfDept(req, res){
         let deptId = req.params['dept_id'];
-        Faculty.getProvindingListOfDept(deptId).
+        Faculty.getOfDept(deptId).
         then(result => res.status(200).json(result)).
         catch(error => res.status(500).json(error));
     }
