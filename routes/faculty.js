@@ -3,9 +3,11 @@ const connectEnsureLogin = require('./../middleware/authentication').connectEnsu
 const jwt_extractor = require('./../middleware/jwt-extractor');
 let router = express.Router();
 const FacultyController = require('./../controller/provider/faculty');
+const StudentController = require('./../controller/provider/student');
 
 router.get('/', FacultyController.getList);
 router.get('/:faculty_id', connectEnsureLogin.ensureLoggedIn(), FacultyController.getSingle);
+router.get('/:faculty_id/students', StudentController.getOfAFaculty);
 router.get('/:faculty_id/port', connectEnsureLogin.ensureLoggedIn(), FacultyController.portSingle);
 router.get('/:faculty_id/port.json', jwt_extractor, FacultyController.portSingleJson);
 

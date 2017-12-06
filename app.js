@@ -75,4 +75,9 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+let a = [];
+let b = ['a', 'b', 'c'];
+let c = a.concat(b);
+c = c.concat(b);
+console.log(c);
 module.exports = app;

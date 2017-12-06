@@ -12,6 +12,10 @@ class Student extends ProviderModel{
         super();
     }
 
+    static providingStudentPathList(facId){
+        return super.serverProviderAddress + '/ords/portal/web/faculty/students/' + facId;
+    }
+
     static providingSinglePath(facId){
         return super.serverProviderAddress + '/ords/portal/web/students/' + facId;
     }
@@ -23,6 +27,14 @@ class Student extends ProviderModel{
     static getWithId(id){
 
         return axios.get(this.providingSinglePath(id)).
+        then(response => {
+            // let faculty = new Faculty(super.parseResponseFromServerToJson(response.data)[0]);
+            return Promise.resolve(super.parseResponseFromServerToJson(response.data)[0]);
+        });
+    }
+
+    static getFromFaculty(facultyId){
+        return axios.get(this.providingStudentPathList(facultyId)).
         then(response => {
             // let faculty = new Faculty(super.parseResponseFromServerToJson(response.data)[0]);
             return Promise.resolve(super.parseResponseFromServerToJson(response.data)[0]);
