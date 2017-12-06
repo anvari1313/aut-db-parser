@@ -19,6 +19,7 @@ const test = require('./routes/test');
 const post = require('./routes/post');
 const faculty = require('./routes/faculty');
 const dept = require('./routes/dept');
+const student = require('./routes/student');
 
 let app = express();
 
@@ -50,6 +51,7 @@ app.use('/', index);
 app.use('/', home);
 app.use('/test', test);
 app.use('/dept', dept);
+app.use('/student', student);
 app.use('/post', connectEnsureLogin.ensureLoggedIn(), post);
 app.use('/faculty',
     // connectEnsureLogin.ensureLoggedIn(),
