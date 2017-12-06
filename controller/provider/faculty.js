@@ -57,6 +57,13 @@ class FacultyController extends Controller{
         config.provider_server.port + '/ords/portal/web/faculties/';
         axios.get(url).then(response => res.json(response.data)).catch();
     }
+
+    getOfDept(req, res){
+        let deptId = req.params['dept_id'];
+        Faculty.getProvindingListOfDept(deptId).
+        then(result => res.status(200).json(result)).
+        catch(error => res.status(500).json(error));
+    }
 }
 
 module.exports = new FacultyController();

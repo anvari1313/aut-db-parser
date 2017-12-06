@@ -3,6 +3,7 @@ const axios = require('axios');
 const Post = require('./../cmodel/post');
 const PostMeta = require('./../cmodel/post-meta');
 const moment = require('moment');
+const Pagination = require('./../../util/pagination');
 
 class Faculty extends ProviderModel{
     constructor(modelObj)
@@ -42,6 +43,10 @@ class Faculty extends ProviderModel{
 
     static providingSinglePath(facId){
         return super.serverProviderAddress + '/ords/portal/web/faculties/' + facId;
+    }
+
+    static getProvindingListOfDept(deptId){
+        return super.serverProviderAddress + '/ords/portal/web/faculties/?dept=' + deptId;
     }
 
     static get providingListPath(){
@@ -108,6 +113,10 @@ class Faculty extends ProviderModel{
         }
 
         return PostMeta.saveAll(postMetas);
+    }
+
+    getOfDept(deptId){
+        return Pagination.remove(Faculty.getProvindingListOfDept(deptId));
     }
 }
 
